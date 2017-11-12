@@ -11,9 +11,9 @@ var PORT = 3000;
 
 app.use(express.static(path.join(__dirname, './app/public')));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.text());
+// app.use(bodyParser.text());
 
 require(path.join(__dirname, 'app/routing/apiRoutes'))(app)
 require(path.join(__dirname, 'app/routing/htmlRoutes'))(app)

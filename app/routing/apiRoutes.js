@@ -1,5 +1,5 @@
 
-var path = require('path');
+// var path = require('path');
 
 var friends = require("../data/friends.js");
 
@@ -21,26 +21,32 @@ module.exports = function(app) {
     var matchImage = "";
 
     var toatlDifference = 10000;
+    console.log(req.body.scores)
+
+    var diffArr = [];
 
     for (var i = 0; i < friends.length; i++) {
       
         var diff = 0
 
 
-        for (var j = 0; j < userResponses.length; j++) {
-              diff += Math.abs(friends[i].scores[j] - userResponses[j]);
+        for (var j = 0; j < friends[i].scores.length; j++) {
+          //console.log("friends"+friends[i].scores[j])
+          //console.log("userResponses"+req.body.scores[j])
+              diff = diff + Math.abs(parseInt(friends[i].scores[j] - parseInt(req.body.scores[j])));
             }
-            if (diff < totalDifference) {
+            
+            diffArr.push(diff);
+      }
 
-              totalDifference = diff;
-              matchName = friends[i].name;
-              matchImage = friends[i].photo
-            }
+    var smallestdiff = diffArr.indexOf(Math.min.apply(null, diffArr))
+    friends.push(req.body);
 
-        }
+    console.log({ name: friends[smallestdiff].name, photo: friends[smallestdiff].photo})
 
-        friends.push(userInput);
+    res.json({ name: friends[smallestdiff].name, photo: friends[smallestdiff].photo });
 
-        res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
   });
-};
+
+}
+            

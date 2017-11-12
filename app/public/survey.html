@@ -164,7 +164,7 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-              <button type="submit" class="btn btn-primary submit">Submit</button>
+              <button type="submit" data-target= "friendsModal" class="btn btn-primary" id="submitButton">Submit</button>
             </form>
           </div>
         </div>
@@ -177,7 +177,7 @@
     </div>
   </footer>
 
-<div class="modal fade" tabindex="-1" role="dialog">
+<div id= friendModal> <div class="modal fade" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -185,7 +185,7 @@
         <h4 class="modal-title">Best Match</h4>
       </div>
       <div class="modal-body">
-        <div id "matchName"></div>
+        <h2 id "matchName"></h2>
         <img id "matchImage"></div>
       </div>
       <div class="modal-footer">
@@ -196,25 +196,26 @@
 </div><!-- /.modal -->
 
 
-
-
-
-
-
-
 <script type="text/javascript">
-  
+  $(document).ready(function () {
+      $("#submitButton").on("click", function () {
+        console.log("in submitButton function")
 
-
-
-
-
-
-
-
-
-    $('#submitButton').on('click', function(event) {
-      event.preventDefault();
+        function validateForm() {
+          var isValid = true;
+          $('.validate').each(function () {
+            if ($(this).val() === '') {
+            isValid = false;
+            }
+          });
+          $('.chosen-select').each(function () {
+            if ($(this).val() === "") {
+            isValid = false;
+            }
+          });
+          return isValid;
+        }
+        if (validateForm() == true) {
     
       var userInput = {
         name: $("#name").val().trim(),
@@ -232,17 +233,48 @@
         $("#question10").val().trim()
         ]
       };
+  
+
+var currentURL = window.location.origin;
+console.log(currentURL)
+console.log(userInput)
+
+  $.post(currentURL + "/api/friends", userInput, function(data) {
+            console.log("in post function"+ userInput)
+              console.log(data)
+            $("#matchName").text(data.name);
+            $("#matchImage").attr("src", data.photo);
+          }); 
 
 
-      $.post("/api/friends", userInput)
-      .done(function(data) {
-        console.log(data);
-        alert("Adding character...");
-      });
-    });
+    $("#friendModal").modal('toggle'); 
+          $('#name').val("");
+          $('#photoUrl').val("");
+          $('#question1').val("");
+          $('#question2').val("");
+          $('#question3').val("");
+          $('#question4').val("");
+          $('#question5').val("");
+          $('#question6').val("");
+          $('#question7').val("");
+          $('#question8').val("");
+          $('#question9').val("");
+          $('#question10').val("");
+      }
+      
+      else{
+          
+          alert("Please fill out ALL fields before submitting survey!")
+          }
+      })
+      
+  })    
+      </script>
 
-   
-    </script>
   </body>
+
 </html>
+
+
+  
 
