@@ -12,15 +12,14 @@ module.exports = function(app) {
 
   app.post("/api/friends", function(req, res) {
 
-    var userInput = req.body;
+    // var userInput = req.body;
 
-    var userResponses = userInput.scores
+    // var userResponses = userInput.scores
 
-    var matchName = "";
+    // var matchName = "";
 
-    var matchImage = "";
+    // var matchImage = "";
 
-    var toatlDifference = 10000;
     console.log(req.body.scores)
 
     var diffArr = [];

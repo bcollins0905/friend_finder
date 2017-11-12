@@ -60,7 +60,6 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-
             <div class="input-field col s12">
               <h3>Question 3</h3>
               <h5>You find it easy to stay relaxed and focused even when there is some pressure.</h5>
@@ -73,7 +72,6 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-
             <div class="input-field col s12">
               <h3>Question 4</h3>
               <h5>You rarely do something just out of sheer curiosity.</h5>
@@ -86,7 +84,6 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-
             <div class="input-field col s12">
               <h3>Question 5</h3>
               <h5>People can rarely upset you.</h5>
@@ -99,7 +96,6 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-
             <div class="input-field col s12">
               <h3>Question 6</h3>
               <h5>It is often difficult for you to relate to other people’s feelings.</h5>
@@ -112,7 +108,6 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-
             <div class="input-field col s12">
               <h3>Question 7</h3>
               <h5>In a discussion, truth should be more important than people’s sensitivities.</h5>
@@ -125,7 +120,6 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-
             <div class="input-field col s12">
               <h3>Question 8</h3>
               <h5>You rarely get carried away by fantasies and ideas.</h5>
@@ -138,7 +132,6 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-
             <div class="input-field col s12">
               <h3>Question 9</h3>
               <h5>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h5>
@@ -151,7 +144,6 @@
                 <option value="5">5 (Strongly Agree)</option>
               </select>
             </div>
-
             <div class="input-field col s12">
               <h3>Question 10</h3>
               <h5>You feel more energetic after spending time with a group of people.</h5>
@@ -174,33 +166,38 @@
       <div class="container">
         <p><a href="/api/friends">API Friends Link</a></p>
       </div>
+    </footer>
+  
+  
+    <!-- Modal -->
+    <div id="friendModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" id="modal1">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">
+                        <strong>Best Match</strong>
+                    </h2>
+                </div>
+                <div class="modal-body">
+                    <h2 id="matchName"></h2>
+                    <img class="img-responsive" id="matchImage" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg"
+                        height="250" weight="250" alt="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </footer>
-
-<div id= friendModal> <div class="modal fade" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Best Match</h4>
-      </div>
-      <div class="modal-body">
-        <h2 id "matchName"></h2>
-        <img id "matchImage"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
+</div>
 <script type="text/javascript">
   $(document).ready(function () {
-      $("#submitButton").on("click", function () {
+      $("#submitButton").on("click", function (event) {
+        event.preventDefault()
         console.log("in submitButton function")
-
         function validateForm() {
           var isValid = true;
           $('.validate').each(function () {
@@ -234,32 +231,28 @@
         ]
       };
   
-
 var currentURL = window.location.origin;
 console.log(currentURL)
 console.log(userInput)
-
   $.post(currentURL + "/api/friends", userInput, function(data) {
             console.log("in post function"+ userInput)
               console.log(data)
             $("#matchName").text(data.name);
             $("#matchImage").attr("src", data.photo);
           }); 
-
-
     $("#friendModal").modal('toggle'); 
-          $('#name').val("");
-          $('#photoUrl').val("");
-          $('#question1').val("");
-          $('#question2').val("");
-          $('#question3').val("");
-          $('#question4').val("");
-          $('#question5').val("");
-          $('#question6').val("");
-          $('#question7').val("");
-          $('#question8').val("");
-          $('#question9').val("");
-          $('#question10').val("");
+          // $('#name').val("");
+          // $('#photoUrl').val("");
+          // $('#question1').val("");
+          // $('#question2').val("");
+          // $('#question3').val("");
+          // $('#question4').val("");
+          // $('#question5').val("");
+          // $('#question6').val("");
+          // $('#question7').val("");
+          // $('#question8').val("");
+          // $('#question9').val("");
+          // $('#question10').val("");
       }
       
       else{
@@ -270,11 +263,5 @@ console.log(userInput)
       
   })    
       </script>
-
   </body>
-
 </html>
-
-
-  
-
