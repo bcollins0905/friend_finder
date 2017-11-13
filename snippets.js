@@ -17,17 +17,6 @@
           $('#question10').val().trim()
         ]
       };
-      // console.log('userInput = ' + JSON.stringify(userInput));
-      // Add user inputs to friends list
-      $.post('/api/friends', userInput)
-          .done(function(data) {
-            // console.log('response = ' + JSON.stringify(data));
-            // Set the name and image values of friend match
-            $('#userMatch').html(data.matchName);
-          $("#userMatchImage").attr("src", data.matchImage);
-          // Pop open the modal dialog
-            $('#modal1').modal('open');
-          });
     });
       // This line is the magic. It"s very similar to the standard ajax function we used.
       // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
