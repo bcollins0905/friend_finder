@@ -1,6 +1,6 @@
 // Dependencies
 // =============================================================
-var express = require("express");
+var port = process.env.PORT || 3000;
 var bodyParser = require("body-parser");
 var path = require("path");
 // Sets up the Express App
